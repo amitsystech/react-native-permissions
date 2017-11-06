@@ -1,32 +1,21 @@
 'use strict';
 
 const ReactNative = require('react-native')
-const RNPermissions = ReactNative.PermissionsAndroid;
+const RNPermissions = ReactNative.NativeModules.ReactNativePermissions;
 const AsyncStorage = ReactNative.AsyncStorage
 
-const RNPTypes = {
-	location: RNPermissions.PERMISSIONS.ACCESS_FINE_LOCATION,
-	camera: RNPermissions.PERMISSIONS.CAMERA,
-	microphone: RNPermissions.PERMISSIONS.RECORD_AUDIO,
-	contacts: RNPermissions.PERMISSIONS.READ_CONTACTS,
-	event: RNPermissions.PERMISSIONS.READ_CALENDAR,
-	storage: RNPermissions.PERMISSIONS.READ_EXTERNAL_STORAGE,
-	photo: RNPermissions.PERMISSIONS.READ_EXTERNAL_STORAGE,
-	callPhone: RNPermissions.PERMISSIONS.CALL_PHONE,
-	readSms: RNPermissions.PERMISSIONS.READ_SMS,
-	receiveSms: RNPermissions.PERMISSIONS.RECEIVE_SMS,
-}
 
-const RESULTS = {
-	[ RNPermissions.RESULTS.GRANTED ]: 'authorized',
-	[ RNPermissions.RESULTS.DENIED ]: 'denied',
-	[ RNPermissions.RESULTS.NEVER_ASK_AGAIN ]: 'restricted',
-}
-
-const STORAGE_KEY = '@RNPermissions:didAskPermission:'
-
-const setDidAskOnce = p => AsyncStorage.setItem(STORAGE_KEY + p, 'true')
-const getDidAskOnce = p =>  AsyncStorage.getItem(STORAGE_KEY + p).then(res => !!res)
+const RNPTypes = [
+	'location',
+	'camera',
+	'microphone',
+	'photo',
+	'contacts',
+	'event',
+	'callPhone',
+	'readSms',
+	'receiveSms',
+]
 
 class ReactNativePermissions {
 	canOpenSettings() {
@@ -41,41 +30,34 @@ class ReactNativePermissions {
 		return Object.keys(RNPTypes);
 	}
 
-	check(permission) {
-		const androidPermission = RNPTypes[permission]
-  	if (!androidPermission) return Promise.reject(`ReactNativePermissions: ${permission} is not a valid permission type on Android`);
-		
-		const shouldShowRationale = ReactNative.NativeModules.PermissionsAndroid.shouldShowRequestPermissionRationale;
+	check(permission, type) {
+  	if (!RNPTypes.includes(permission)) {
+			return Promise.reject(`ReactNativePermissions: ${permission} is not a valid permission type on iOS`);
+		}
 
-		return RNPermissions.check(androidPermission)
-			.then(isAuthorized => {
-				if (isAuthorized) return 'authorized'
+		console.log('** permission=', permission);
 
-				return getDidAskOnce(permission)
-					.then(didAsk => {
-						if (didAsk) {
-							return shouldShowRationale(androidPermission)
-								.then(shouldShow => shouldShow ? 'denied' : 'restricted')
-						}
-						return 'undetermined'
-					})
-			})
+		return RNPermissions.getPermissionStatus(permission, type);
 	}
 
+	 checkGPSPermision(){
+		 return RNPermissions.checkGPSPermision()
+	 }
 
-	request(permission) {
-		const androidPermission = RNPTypes[permission]
-  	if (!androidPermission) return Promise.reject(`ReactNativePermissions: ${permission} is not a valid permission type on Android`);
+	request(permission, type) {
 
 
-		return RNPermissions.request(androidPermission)
-			.then(res => {
-				// RNPermissions.request() to native module resolves to boolean
-				// rather than string if running on OS version prior to Android M 
-				if (typeof res === 'boolean') return res ? 'authorized' : 'denied';
-				return setDidAskOnce(permission)
-					.then(() => RESULTS[res])
-			});
+		if (!RNPTypes.includes(permission)) {
+			return Promise.reject(`ReactNativePermissions: ${permission} is not a valid permission type on iOS`);
+		}
+
+		if (permission == 'backgroundRefresh') {
+			return Promise.reject('ReactNativePermissions: You cannot request backgroundRefresh')
+		}
+
+		console.log('** request=', permission);
+
+		return RNPermissions.requestPermission(permission, type)
 	}
 
 	checkMultiple(permissions) {

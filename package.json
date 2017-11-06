@@ -1,18 +1,92 @@
 {
-  "name": "react-native-permissions",
-  "version": "1.0.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/joshblour/react-native-permissions.git"
+  "_args": [
+    [
+      {
+        "raw": "react-native-permissions@1.0.1",
+        "scope": null,
+        "escapedName": "react-native-permissions",
+        "name": "react-native-permissions",
+        "rawSpec": "1.0.1",
+        "spec": "1.0.1",
+        "type": "version"
+      },
+      "/Users/MacBookpro15/Projects/SafeMotos-v4.0"
+    ]
+  ],
+  "_from": "react-native-permissions@1.0.1",
+  "_id": "react-native-permissions@1.0.1",
+  "_inCache": true,
+  "_location": "/react-native-permissions",
+  "_nodeVersion": "6.10.3",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-permissions-1.0.1.tgz_1506588131972_0.3221222802530974"
   },
-  "main": "index",
-  "license": "MIT",
+  "_npmUser": {
+    "name": "joshblour",
+    "email": "yonaforst@hotmail.com"
+  },
+  "_npmVersion": "4.1.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-permissions@1.0.1",
+    "scope": null,
+    "escapedName": "react-native-permissions",
+    "name": "react-native-permissions",
+    "rawSpec": "1.0.1",
+    "spec": "1.0.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-permissions/-/react-native-permissions-1.0.1.tgz",
+  "_shasum": "b45c369763c4e298ba52ff9392ca807cbcdd6424",
+  "_shrinkwrap": null,
+  "_spec": "react-native-permissions@1.0.1",
+  "_where": "/Users/MacBookpro15/Projects/SafeMotos-v4.0",
+  "author": {
+    "name": "Yonah Forst",
+    "email": "yonaforst@hotmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/joshblour/react-native-permissions/issues"
+  },
+  "dependencies": {},
+  "description": "Check user permissions in React Native",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "b45c369763c4e298ba52ff9392ca807cbcdd6424",
+    "tarball": "https://registry.npmjs.org/react-native-permissions/-/react-native-permissions-1.0.1.tgz"
+  },
+  "gitHead": "11e376abd2c3e20671d9c99c63c50554c071d319",
+  "homepage": "https://github.com/joshblour/react-native-permissions",
   "keywords": [
     "react-native",
     "react-permissions",
     "permissions"
   ],
-  "author": "Yonah Forst <yonaforst@hotmail.com>",
-  "homepage": "https://github.com/joshblour/react-native-permissions",
-  "description": "Check user permissions in React Native"
+  "license": "MIT",
+  "main": "index",
+  "maintainers": [
+    {
+      "name": "yonahforst",
+      "email": "yonaforst@hotmail.com"
+    },
+    {
+      "name": "joshblour",
+      "email": "yonaforst@hotmail.com"
+    }
+  ],
+  "name": "react-native-permissions",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshblour/react-native-permissions.git"
+  },
+  "scripts": {},
+  "version": "1.0.1"
 }
